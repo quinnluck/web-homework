@@ -1,7 +1,8 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 import { css } from '@emotion/core'
-import { Home } from './home'
+import { Home } from './components/Home'
+import { LoginBox } from './components/LoginBox'
 
 function AppRouter () {
   return (
@@ -17,8 +18,12 @@ function AppRouter () {
             </li>
           </ul>
         </nav>
+
         <div className='main-content' css={contentStyle}>
-          <Route component={Home} exact path='/' />
+          <Route component={LoginBox} exact path='/login' />
+          <Route component={Home} exact path='/'>
+            <Redirect to='/login' />
+          </Route>
           <Route component={() => (<div>Content for /another route</div>)} exact path='/another' />
         </div>
       </div>
