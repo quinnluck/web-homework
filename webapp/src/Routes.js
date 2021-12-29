@@ -4,27 +4,16 @@ import { css } from '@emotion/core'
 import { Home } from './components/Home'
 import { LoginBox } from './components/LoginBox'
 
-function AppRouter () {
+function AppRouter() {
   return (
     <Router>
       <div css={layoutStyle}>
-        <nav css={navStyle}>
-          <ul >
-            <li>
-              <Link to='/'>Home</Link>
-            </li>
-            <li>
-              <Link to='/another'>Another route</Link>
-            </li>
-          </ul>
-        </nav>
-
         <div className='main-content' css={contentStyle}>
-          <Route component={LoginBox} exact path='/login' />
-          <Route component={Home} exact path='/'>
+          <Route exact path='/'>
             <Redirect to='/login' />
           </Route>
-          <Route component={() => (<div>Content for /another route</div>)} exact path='/another' />
+          <Route component={LoginBox} exact path='/login' />
+          <Route component={Home} exact path='/home' />
         </div>
       </div>
     </Router>
@@ -37,20 +26,6 @@ const layoutStyle = css`
     display: grid;
     grid-row-gap: 24px;
     padding: 8px;
-`
-
-const navStyle = css`
-  grid-row: 1;
-
-  & > ul {
-      display: flex;
-      flex-direction: row;
-      list-style-type: none;
-  }
-  
-  & > ul > li:not(:first-of-type) {
-    margin-left: 16px;
-  }
 `
 
 const contentStyle = css`
